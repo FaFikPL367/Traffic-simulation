@@ -1,0 +1,82 @@
+{
+  "roads": [
+    {
+      "roadOrientation": "BOTTOM",
+      "lanes": [
+        {
+          "laneDirection": "STRAIGHT",
+          "availableGreenArrow": false
+        },
+        {
+          "laneDirection": "LEFT",
+          "availableGreenArrow": false
+        },
+        {
+          "laneDirection": "RIGHT",
+          "availableGreenArrow": false
+        }
+      ]
+    },
+    {
+      "roadOrientation": "RIGHT",
+      "lanes": [
+        {
+          "laneDirection": "STRAIGHT",
+          "availableGreenArrow": false
+        },
+        {
+          "laneDirection": "LEFT",
+          "availableGreenArrow": false
+        },
+        {
+          "laneDirection": "RIGHT",
+          "availableGreenArrow": false
+        }
+      ]
+    },
+    {
+      "roadOrientation": "LEFT",
+      "lanes": [
+        {
+          "laneDirection": "STRAIGHT",
+          "availableGreenArrow": false
+        },
+        {
+          "laneDirection": "LEFT",
+          "availableGreenArrow": false
+        },
+        {
+          "laneDirection": "RIGHT",
+          "availableGreenArrow": false
+        }
+      ]
+    },
+    {
+      "roadOrientation": "TOP",
+      "lanes": [
+        {
+          "laneDirection": "STRAIGHT",
+          "availableGreenArrow": false
+        },
+        {
+          "laneDirection": "LEFT",
+          "availableGreenArrow": false
+        },
+        {
+          "laneDirection": "RIGHT",
+          "availableGreenArrow": false
+        }
+      ]
+    }
+  ],
+  "commands": [
+    {
+      "type": "addVehicle",
+      "startRoadOrientation": "TOP",
+      "endRoadOrientation": "BOTTOM"
+    },
+    {
+      "type": "step"
+    }
+  ]
+}
