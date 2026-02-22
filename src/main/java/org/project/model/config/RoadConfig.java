@@ -8,8 +8,8 @@ import java.util.List;
 /**
  * RoadConfig is a record that contains information about road ot junction and lanes in that road
  *
- * @param roadOrientation
- * @param laneConfigList
+ * @param roadOrientation Road orientation on junction (TOP, RIGHT, BOTTOM, LEFT)
+ * @param laneConfigList List with information about lanes in this road
  */
 public record RoadConfig(
         @JsonProperty("roadOrientation") RoadOrientation roadOrientation,

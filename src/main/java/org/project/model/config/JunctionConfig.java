@@ -8,7 +8,7 @@ import java.util.List;
  * JunctionConfig is a record that contains first part on input JSON file. It contains all information
  * needed to create own junction for simulation.
  *
- * @param roadConfigList
+ * @param roadConfigList Read config of how junction will be created
  */
 public record JunctionConfig(
     @JsonProperty("roads") List<RoadConfig> roadConfigList

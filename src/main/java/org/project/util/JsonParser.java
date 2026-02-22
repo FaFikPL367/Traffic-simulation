@@ -1,13 +1,14 @@
 package org.project.util;
 
 
-import org.project.model.config.CommandConfig;
-import org.project.model.config.JunctionConfig;
-import org.project.model.config.SimulationConfig;
+import org.project.model.config.*;
+import org.project.model.dto.SimulationResultDto;
+import org.project.model.dto.StepStatusDto;
 import tools.jackson.databind.ObjectMapper;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.util.List;
 
 /**
  * Class for methods used for parsing JSON files
@@ -35,5 +36,21 @@ public class JsonParser {
 
         // Return simulation config
         return new SimulationConfig(junctionConfig, commandConfig);
+    }
+
+    /**
+     * Method to write JSON output file
+     */
+    public void writeOutput(String outputFileName, List<StepStatusDto> passedVehicle) {
+        try {
+            // Create output JSON file
+            File output = new File(outputFileName);
+
+            // Write first list
+            mapper.writerWithDefaultPrettyPrinter().writeValue(output, new SimulationResultDto(passedVehicle));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
     }
 }

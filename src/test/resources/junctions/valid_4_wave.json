@@ -87,32 +87,6 @@
   ],
   "commands": [
     {
-      "type": "addVehicle",
-      "startRoadOrientation": "TOP",
-      "endRoadOrientation": "RIGHT"
-    },
-    {
-      "type": "addVehicle",
-      "startRoadOrientation": "BOTTOM",
-      "endRoadOrientation": "RIGHT"
-    },
-    {
-      "type": "addVehicle",
-      "startRoadOrientation": "LEFT",
-      "endRoadOrientation": "BOTTOM"
-    },
-    {
-      "type": "addVehicle",
-      "startRoadOrientation": "BOTTOM",
-      "endRoadOrientation": "TOP"
-    },
-    {
-      "type": "step"
-    },
-    {
-      "type": "step"
-    },
-    {
       "type": "step"
     }
   ]

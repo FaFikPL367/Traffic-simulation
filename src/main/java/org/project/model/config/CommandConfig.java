@@ -5,6 +5,10 @@ import org.project.model.command.CommandType;
 
 import java.util.List;
 
+/**
+ * CommandConfig is a record that contains all read commands from input JSON file
+ * @param commandList List of commands to simulation
+ */
 public record CommandConfig(
         @JsonProperty("commands") List<CommandType> commandList
 ) {

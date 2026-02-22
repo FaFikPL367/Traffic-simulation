@@ -1,0 +1,55 @@
+{
+  "roads": [
+    {
+      "roadOrientation": "BOTTOM",
+      "lanes": [
+        {
+          "laneDirection": "STRAIGHT",
+          "hasPriority": 0
+        },
+        {
+          "laneDirection": "RIGHT",
+          "hasPriority": 0
+        },
+        {
+          "laneDirection": "BACKWARD",
+          "hasPriority": 0
+        }
+      ]
+    },
+    {
+      "roadOrientation": "TOP",
+      "lanes": [
+        {
+          "laneDirection": "STRAIGHT",
+          "hasPriority": 0
+        },
+        {
+          "laneDirection": "LEFT",
+          "hasPriority": 0
+        },
+        {
+          "laneDirection": "BACKWARD",
+          "hasPriority": 0
+        }
+      ]
+    },
+    {
+      "roadOrientation": "RIGHT",
+      "lanes": [
+        {
+          "laneDirection": "LEFT",
+          "hasPriority": 0
+        },
+        {
+          "laneDirection": "RIGHT",
+          "hasPriority": 0
+        },
+        {
+          "laneDirection": "BACKWARD",
+          "hasPriority": 0
+        }
+      ]
+    }
+  ]
+}

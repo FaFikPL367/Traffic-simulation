@@ -20,7 +20,7 @@ public class LaneConfigTest {
         // When & Then
         IllegalArgumentException exception = assertThrows(
                 IllegalArgumentException.class,
-                () -> new LaneConfig(laneDirection, false)
+                () -> new LaneConfig(laneDirection, 0)
         );
 
         // Check exception message
@@ -28,31 +28,34 @@ public class LaneConfigTest {
     }
 
     @Test
-    void giveStraightLaneDirectionWithGreenArrow_whenParsingLaneConfig_thenFalseGreenArrow() {
+    void giveNullHasPriority_whenParsingLaneConfig_thenThrowException() {
         // Given
         LaneDirection laneDirection = LaneDirection.STRAIGHT;
-
-        // When
-        LaneConfig laneConfig = new LaneConfig(laneDirection, true);
-
-        // Then
-        boolean expectedGreenArrowBoolean = false;
-        assertEquals(expectedGreenArrowBoolean, laneConfig.availableGreenArrow());
-    }
-
-    @Test
-    void giveNullGreenArrow_whenParsingLaneConfig_thenThrowException() {
-        // Given
-        LaneDirection laneDirection = LaneDirection.STRAIGHT;
-        Boolean availableGreenArrow = null;
+        Integer hasPriority = null;
 
         // When & Then
         IllegalArgumentException exception = assertThrows(
                 IllegalArgumentException.class,
-                () -> new LaneConfig(laneDirection, availableGreenArrow)
+                () -> new LaneConfig(laneDirection, hasPriority)
         );
 
         // Check exception message
-        assertEquals("AvailableGreenArrow wasn't given or given value is incorrect!", exception.getMessage());
+        assertEquals("HasPriority wasn't given or given value is incorrect!", exception.getMessage());
+    }
+
+    @Test
+    void giveWrongPriority_whenParsingLaneConfig_thenThrowException() {
+        // Given
+        LaneDirection laneDirection = LaneDirection.STRAIGHT;
+        Integer hasPriority = 2;
+
+        // When & Then
+        IllegalArgumentException exception = assertThrows(
+                IllegalArgumentException.class,
+                () -> new LaneConfig(laneDirection, hasPriority)
+        );
+
+        // Check exception message
+        assertEquals("HasPriority need to be value 0 (low priority) or 1 (high priority)!", exception.getMessage());
     }
 }

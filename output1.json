@@ -1,0 +1,11 @@
+{
+  "stepStatutes" : [ {
+    "leftVehicles" : [ "1", "2" ]
+  }, {
+    "leftVehicles" : [ ]
+  }, {
+    "leftVehicles" : [ "3" ]
+  }, {
+    "leftVehicles" : [ "4" ]
+  } ]
+}

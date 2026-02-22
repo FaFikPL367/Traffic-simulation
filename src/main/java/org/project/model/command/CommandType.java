@@ -2,6 +2,7 @@ package org.project.model.command;
 
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
+import org.project.Simulation;
 
 
 @JsonTypeInfo(
@@ -14,4 +15,9 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo;
         @JsonSubTypes.Type(value = Step.class, name = "step")
 })
 
-public interface CommandType {}
+public interface CommandType {
+    /**
+     * Method that execute read command
+     */
+    void execute(Simulation simulation);
+}

@@ -8,11 +8,13 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 /**
  * LaneConfig record is for saving configuration of single lane
+ * @param id ID of lane
+ * @param laneDirection Direction of lane (LEFT, RIGHT, STRAIGHT, BACKWARD)
  */
 public record LaneConfig(
         int id,
         LaneDirection laneDirection,
-        Boolean availableGreenArrow
+        Integer priority
 ) {
 
     // Variable for ID generator
@@ -22,15 +24,13 @@ public record LaneConfig(
     @JsonCreator
     public LaneConfig(
             @JsonProperty("laneDirection") LaneDirection laneDirection,
-            @JsonProperty("availableGreenArrow") Boolean availableGreenArrow
+            @JsonProperty("hasPriority") Integer hasPriority
     ) {
         if (laneDirection == null) throw new IllegalArgumentException("LaneDirection wasn't given or given value is incorrect!");
-        if (availableGreenArrow == null) throw new IllegalArgumentException("AvailableGreenArrow wasn't given or given value is incorrect!");
-
-        // Green arrow on straight lane isn't available
-        if (laneDirection == LaneDirection.STRAIGHT && availableGreenArrow) availableGreenArrow = false;
+        if (hasPriority == null) throw new IllegalArgumentException("HasPriority wasn't given or given value is incorrect!");
+        if (hasPriority != 0 && hasPriority != 1) throw new IllegalArgumentException("HasPriority need to be value 0 (low priority) or 1 (high priority)!");
 
         // Set attributes
-        this(ID_GENERATOR.getAndIncrement(), laneDirection, availableGreenArrow);
+        this(ID_GENERATOR.getAndIncrement(), laneDirection, hasPriority);
     }
 }

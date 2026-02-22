@@ -6,9 +6,13 @@ import java.util.Arrays;
 
 /**
  * LaneDirection is an enumeration of all possible direction of lane
+ * STRAIGHT - lane to go straight
+ * LEFT - lane to turn left
+ * RIGHT - lane to turn right
+ * BACKWARD - to that lane vehicle from another road can turn into
  */
 public enum LaneDirection {
-    STRAIGHT, LEFT, RIGHT;
+    STRAIGHT, LEFT, RIGHT, BACKWARD;
 
     @JsonCreator
     public static LaneDirection fromString(String value) {
