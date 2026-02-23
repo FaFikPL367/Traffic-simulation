@@ -91,8 +91,7 @@
       "numberOfSimulationSteps": 50,
       "minNumberOfVehicleToGenerate": 10,
       "maxNumberOfVehicleToGenerate": 15,
-      "minSimulationStepInRow": 5,
-      "maxSimulationStepInRow": 10
+      "minSimulationStepInRow": 5
     }
   ]
 }

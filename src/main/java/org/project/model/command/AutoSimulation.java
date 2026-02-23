@@ -18,11 +18,11 @@ import java.util.Random;
  * @param maxSimulationStepInRow Higher range number of steps that can be in a row
  */
 public record AutoSimulation(
-        int numberOfSimulationSteps,
-        int minNumberOfVehicleToGenerate,
-        int maxNumberOfVehicleToGenerate,
-        int minSimulationStepInRow,
-        int maxSimulationStepInRow
+        Integer numberOfSimulationSteps,
+        Integer minNumberOfVehicleToGenerate,
+        Integer maxNumberOfVehicleToGenerate,
+        Integer minSimulationStepInRow,
+        Integer maxSimulationStepInRow
 ) implements CommandType {
 
     // Variable for RANDOM object
@@ -30,6 +30,11 @@ public record AutoSimulation(
 
     @JsonCreator
     public AutoSimulation {
+        if (numberOfSimulationSteps == null || minNumberOfVehicleToGenerate == null || maxNumberOfVehicleToGenerate == null ||
+            minSimulationStepInRow == null || maxSimulationStepInRow == null) {
+            throw new IllegalArgumentException("One of the parameters wasn't provided!");
+        }
+
         if (numberOfSimulationSteps <= 0 || minSimulationStepInRow <= 0 || maxSimulationStepInRow <= 0 ||
             minNumberOfVehicleToGenerate <= 0 || maxNumberOfVehicleToGenerate <= 0) {
             throw new IllegalArgumentException("None of passed parameters can be lower or equal to 0!");
@@ -59,7 +64,7 @@ public record AutoSimulation(
         // Create list for commands
         List<CommandType> commandList = new ArrayList<>();
 
-        // Copy numberOFsimulationSteps
+        // Copy numberOfSimulationSteps
         int remainingSteps = this.numberOfSimulationSteps;
 
         // In rotation, we generate vehicle and generate number of simulation steps
@@ -102,8 +107,6 @@ public record AutoSimulation(
             // Toggle generateVehicle boolean
             generateVehicle = !generateVehicle;
         }
-
-        System.out.println(commandList);
 
         // Set new command list to simulation
         simulation.getSimulationConfig().commandConfig().commandList()

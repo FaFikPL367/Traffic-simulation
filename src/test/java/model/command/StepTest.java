@@ -50,7 +50,7 @@ public class StepTest {
             step.execute(simulationMock);
 
             // Then
-            mockedController.verify(() -> TrafficController.continueVehicleDrive(simulationMock), times(1));
+            mockedController.verify(() -> TrafficController.continueVehicleDrive(simulationMock, step.id()), times(1));
             verify(simulationMock, never()).getJunction();
         }
     }
@@ -123,7 +123,7 @@ public class StepTest {
             // Verify if maxPassedVehicle was counted properly
             verify(simulationMock).setMaxPassedVehicleOnMostImportantLane(5);
 
-            mockedController.verify(() -> TrafficController.continueVehicleDrive(simulationMock), times(1));
+            mockedController.verify(() -> TrafficController.continueVehicleDrive(simulationMock, stepCommand.id()), times(1));
         }
     }
 }

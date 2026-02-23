@@ -93,7 +93,7 @@ public class JsonParserTest {
         // Given
         Path outputFile = tempDir.resolve("output.json");
         List<StepStatusDto> passedVehicle = List.of(
-                new StepStatusDto(List.of("car1", "car2"))
+                new StepStatusDto(List.of("car1", "car2"), 1, 0)
         );
 
         // When
