@@ -6,7 +6,7 @@ import java.util.Arrays;
 import java.util.Optional;
 
 /**
- * RoadOrientation is an enumeration that contains possible orientation of roads at junction.
+ * RoadOrientation is an enumeration that represents the possible orientations of roads at a junction.
  *
  *     | T |
  *     | O |
@@ -34,10 +34,10 @@ public enum RoadOrientation {
     }
 
     /**
-     * Methods that find end road orientation for lane base on start road orientation and lane direction
-     * @param laneDirection Value with lane direction that vehicle is on
-     * @param startRoadOrientation Start road orientation for vehicle
-     * @return EndRoadOrientation base on lane direction and start road direction
+     * Finds the destination road orientation based on the starting road orientation and lane direction.
+     * @param laneDirection The direction of the lane that vehicle is currently on.
+     * @param startRoadOrientation The starting road orientation for the vehicle.
+     * @return An optional containing the destination RoadOrientation, or an empty optional if the lane direction is BACKWARD.
      */
     public static Optional<RoadOrientation> findRoadOrientationBaseOnStartAndLaneDirection(LaneDirection laneDirection, RoadOrientation startRoadOrientation) {
         return switch (laneDirection) {
@@ -48,7 +48,7 @@ public enum RoadOrientation {
         };
     }
 
-    // Helper methods to find correct road orientation for lane direction
+    // Helper methods to find the correct road orientation based on the lane direction.
     private static RoadOrientation roadOrientationAfterRightTurn(RoadOrientation roadOrientation) {
         return switch (roadOrientation) {
             case RIGHT -> TOP;

@@ -2,7 +2,7 @@ package org.project.model.command;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import org.project.Simulation;
-import org.project.TrafficController;
+import org.project.util.TrafficController;
 import org.project.enums.LaneDirection;
 import org.project.enums.RoadOrientation;
 import org.project.model.Lane;
@@ -11,7 +11,8 @@ import java.util.*;
 import java.util.concurrent.atomic.AtomicInteger;
 
 /**
- * Step is a command that run single step of simulation
+ * A command that executes a single step of the simulation.
+ * @param id The unique ID of the simulation step.
  */
 public record Step(
         int id
@@ -26,6 +27,10 @@ public record Step(
         this(ID_GENERATOR.getAndIncrement());
     }
 
+    /**
+     * Executes the simulation step by updating traffic lights and moving vehicles.
+     * @param simulation The main simulation object.
+     */
     @Override
     public void execute(Simulation simulation) {
         System.out.printf("Do STEP (%d) of simulation!%n", id);
@@ -82,8 +87,8 @@ public record Step(
     }
 
     /**
-     * Method to recalculate again queue that contains priority for each lane
-     * @param simulation Main simulation object
+     * Recalculates the priority queue for all active lanes.
+     * @param simulation The main simulation object.
      */
     private void recalculatePriorityQueue(Simulation simulation) {
         // Filter all active lane (lane without BACKWARD)
@@ -101,10 +106,10 @@ public record Step(
     }
 
     /**
-     * Method to recalculate BACKWARD lane for each road
-     * @param simulation Main simulation object
-     * @param priorityLane Lane that was picked as priority in simulation step
-     * @return Map that represents road orientation and number of BACKWARD lanes
+     * Calculates the number of available BACKWARD (receiving) lanes for each road.
+     * @param simulation   The main simulation object.
+     * @param priorityLane The lane that was selected as the highest priority in the current simulation step.
+     * @return A map associating each road orientation with its count of available BACKWARD lanes.
      */
     private Map<RoadOrientation, Integer> recalculateBackwardLanes(Simulation simulation, Lane priorityLane) {
         Map<RoadOrientation, Integer> backwardLaneCounter = new HashMap<>();

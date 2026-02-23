@@ -5,11 +5,11 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import java.util.Arrays;
 
 /**
- * LaneDirection is an enumeration of all possible direction of lane
- * STRAIGHT - lane to go straight
- * LEFT - lane to turn left
- * RIGHT - lane to turn right
- * BACKWARD - to that lane vehicle from another road can turn into
+ * LaneDirection is an enumeration of all possible directions for a lane.
+ * STRAIGHT - a lane for going straight.
+ * LEFT - a lane for turning left.
+ * RIGHT - a lane for turning right.
+ * BACKWARD - a receiving lane that vehicle from other roads can turn into.
  */
 public enum LaneDirection {
     STRAIGHT, LEFT, RIGHT, BACKWARD;

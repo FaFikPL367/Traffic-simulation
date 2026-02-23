@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.Queue;
 
 /**
- * Class for Lane mode in simulation
+ * Represents a single lane within the traffic simulation model.
  */
 @Getter
 @Setter
@@ -41,23 +41,24 @@ public class Lane {
     }
 
     /**
-     * Method to count new lane wage
+     * Calculates and updates the priority weight of the lane.
+     * The weight is based on the total waiting time and the current number of vehicles.
      */
     public void countNewWage() {
         this.laneWage = (Simulation.WAITING_TIME_WAGE * countVehicleWaitingTime()) + (Simulation.VEHICLE_COUNT_WAGE * getVehicleCount());
     }
 
     /**
-     * Method to count vehicle
-     * @return Number of vehicle on that lane
+     * Counts vehicle on this lane.
+     * @return The number of vehicles on this lane.
      */
     public int getVehicleCount() {
         return vehicles.size();
     }
 
     /**
-     * Method to sum waiting times of all vehicles on that lane
-     * @return Sum of waiting time
+     * Calculates the total sum of waiting times for all vehicles currently on this lane.
+     * @return The sum of waiting times.
      */
     private int countVehicleWaitingTime() {
         return vehicles.stream()

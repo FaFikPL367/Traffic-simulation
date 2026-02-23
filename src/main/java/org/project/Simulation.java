@@ -8,6 +8,7 @@ import org.project.model.Lane;
 import org.project.model.command.CommandType;
 import org.project.model.config.SimulationConfig;
 import org.project.model.dto.StepStatusDto;
+import org.project.util.ConflictFinder;
 import org.project.util.JsonParser;
 
 import java.io.FileNotFoundException;
@@ -17,7 +18,7 @@ import java.util.List;
 import java.util.PriorityQueue;
 
 /**
- * Main simulation class
+ * The core engine of the traffic simulation, managing the state, junction model, and execution of commands.
  */
 @Getter
 @Setter
@@ -34,16 +35,26 @@ public class Simulation {
     private boolean countWagesAgain = true;
     private Lane mostImportantLane = null;
 
-    // PriorityQueue where will be added lanes with high priority (waiting time for vehicle is MAX or wage is the biggest)
+    /**
+     * PriorityQueue to manage lanes based on their urgency.
+     */
     private PriorityQueue<Lane> priorityLanes = new PriorityQueue<>(LANE_COMPARATOR);
 
     private int maxPassedVehicleOnMostImportantLane = 0;
     private List<Lane> lastGreenLanes = new ArrayList<>();
     private List<StepStatusDto> passedVehicle = new ArrayList<>();
 
-    // Constant values
+    // Simulation constants
     public static final double WAITING_TIME_WAGE = 0.8;
     public static final double VEHICLE_COUNT_WAGE = 0.2;
+
+    /**
+     * Comparator for ordering lanes in the priority queue.
+     * Priority is determined by:
+     * 1. Time spent in priority queue
+     * 2. Calculated lane weight (priority value)
+     * 3. Static priority flag
+     */
     public static final Comparator<Lane> LANE_COMPARATOR = Comparator
             .comparingInt(Lane::getTimeInPriorityQueue)
             .thenComparingDouble(Lane::getLaneWage)
@@ -71,7 +82,8 @@ public class Simulation {
     }
 
     /**
-     * Method to run simulation
+     * Starts the simulation by executing all commands loaded from the configuration.
+     * After execution, the results are saved to the output JSON file.
      */
     public void runSimulation() {
         // Copy list of commands
@@ -87,6 +99,9 @@ public class Simulation {
         jsonParser.writeOutput(outputFileName, passedVehicle);
     }
 
+    /**
+     * Decrements the counter for vehicles allowed to pass on the current priority lane.
+     */
     public void decrementMaxPassedVehicle() {
         maxPassedVehicleOnMostImportantLane--;
     }

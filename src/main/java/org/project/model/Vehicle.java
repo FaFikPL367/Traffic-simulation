@@ -4,7 +4,7 @@ import lombok.Getter;
 import org.project.enums.RoadOrientation;
 
 /**
- * Class for Vehicle model in simulation
+ * Represents a single vehicle within the traffic simulation.
  */
 @Getter
 public class Vehicle {
@@ -23,7 +23,7 @@ public class Vehicle {
     }
 
     /**
-     * Method to increment waiting time
+     * Increments the vehicle's waiting time by one simulation step.
      */
     public void incrementWaitingTime() {
         this.waitingTime++;

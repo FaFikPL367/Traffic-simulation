@@ -5,8 +5,10 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.List;
 
 /**
- * StepStatus is a record that contains vehicle that left junction on particular simulation step
- * @param leftVehicles List with IDs of vehicle that left junction on particular step
+ * Represents the status of a specific simulation step, detailing the vehicles that left the junction.
+ * @param leftVehicles A list containing the IDs of the vehicles that exited the junction during this step.
+ * @param stepId The unique ID of the simulation step.
+ * @param totalNumberOfVehicleOnJunction The total number of vehicles remaining on the junction during this step.
  */
 public record StepStatusDto(
         @JsonProperty("leftVehicles")  List<String> leftVehicles,

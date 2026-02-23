@@ -1,9 +1,15 @@
 {
   "stepStatutes" : [ {
-    "leftVehicles" : [ "4", "3", "2" ]
+    "leftVehicles" : [ "4", "3", "2" ],
+    "stepId" : 1,
+    "totalNumberOfVehicleOnJunction" : 1
   }, {
-    "leftVehicles" : [ "1" ]
+    "leftVehicles" : [ "1" ],
+    "stepId" : 2,
+    "totalNumberOfVehicleOnJunction" : 0
   }, {
-    "leftVehicles" : [ ]
+    "leftVehicles" : [ ],
+    "stepId" : 3,
+    "totalNumberOfVehicleOnJunction" : 0
   } ]
 }

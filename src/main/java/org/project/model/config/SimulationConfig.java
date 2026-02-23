@@ -1,10 +1,9 @@
 package org.project.model.config;
 
 /**
- * Simulation config is a record that contains all necessary configuration for simulation
- *
- * @param junctionConfig Read config about junction from input JSON file
- * @param commandConfig Read commands from input JSON file
+ * Represents the root configuration required for the simulation.
+ * @param junctionConfig The junction configuration parsed from the input JSON file.
+ * @param commandConfig The command configuration parsed from the input JSON file.
  */
 public record SimulationConfig(
         JunctionConfig junctionConfig,

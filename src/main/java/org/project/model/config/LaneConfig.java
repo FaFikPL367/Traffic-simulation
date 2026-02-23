@@ -7,9 +7,10 @@ import org.project.enums.LaneDirection;
 import java.util.concurrent.atomic.AtomicInteger;
 
 /**
- * LaneConfig record is for saving configuration of single lane
- * @param id ID of lane
- * @param laneDirection Direction of lane (LEFT, RIGHT, STRAIGHT, BACKWARD)
+ * Represents the configuration of a single lane parsed from the input file.
+ * @param id The unique ID of the lane.
+ * @param laneDirection The directional type of the lane (LEFT, RIGHT, STRAIGHT, or BACKWARD).
+ * @param priority The priority level of the lane (0 for low priority, 1 for high priority).
  */
 public record LaneConfig(
         int id,

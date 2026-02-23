@@ -5,10 +5,10 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.List;
 
 /**
- * JunctionConfig is a record that contains first part on input JSON file. It contains all information
- * needed to create own junction for simulation.
+ * A configuration record representing the first part of the input JSON file.
+ * It contains all the necessary information to build a custom junction for the simulation.
  *
- * @param roadConfigList Read config of how junction will be created
+ * @param roadConfigList The list of road configurations defining how the junction will be constructed.
  */
 public record JunctionConfig(
     @JsonProperty("roads") List<RoadConfig> roadConfigList

@@ -1,6 +1,8 @@
+package util;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.project.ConflictFinder;
+import org.project.util.ConflictFinder;
 import org.project.enums.LaneDirection;
 import org.project.enums.RoadOrientation;
 import org.project.factory.JunctionFactory;

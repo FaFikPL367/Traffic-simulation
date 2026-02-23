@@ -1,4 +1,4 @@
-package org.project;
+package org.project.util;
 
 import org.project.enums.LaneDirection;
 import org.project.model.Lane;
@@ -8,14 +8,14 @@ import java.util.Collections;
 import java.util.List;
 
 /**
- * Class for methods that help find conflict in junction between lanes
+ * A utility class that identifies conflicting traffic movements between lanes at a junction.
  */
 public class ConflictFinder {
     /**
-     * Method to find all conflict lanes for passed lane
-     * @param lane Lane that we want to find conflicts
-     * @param otherLanes All lanes in junction
-     * @return List with conflict lanes
+     * Finds all conflicting lanes for the specified lane.
+     * @param lane The lane for which to find conflicts.
+     * @param otherLanes A list of all lanes in the junction.
+     * @return A list of conflicting lanes.
      */
     public static List<Lane> findConflictForLane(Lane lane, List<Lane> otherLanes) {
         // Find conflict base on a line direction
@@ -27,11 +27,10 @@ public class ConflictFinder {
     }
 
     /**
-     * Method to find conflict lanes for passed lane that has STRAIGHT direction
-     *
-     * @param importantLane Lane for which we want to find conflict
-     * @param otherLanes All other lanes
-     * @return List that contains lane with conflict
+     * Finds conflicting lanes for a specified lane that has a STRAIGHT direction.
+     * @param importantLane The lane for which to find conflicts.
+     * @param otherLanes A list of all other lanes.
+     * @return A list containing the conflicting lanes.
      */
     private static List<Lane> findConflictForStraightLane(Lane importantLane, List<Lane> otherLanes) {
         // List for conflict lanes
@@ -63,11 +62,10 @@ public class ConflictFinder {
     }
 
     /**
-     * Method to find conflict lanes for passed lane that has LEFT direction
-     *
-     * @param importantLane Lane for which we want to find conflict
-     * @param otherLanes All other lanes
-     * @return List that contains lane with conflict
+     * Finds conflicting lanes for a specified lane that has a LEFT direction.
+     * @param importantLane The lane for which to find conflicts.
+     * @param otherLanes A list of all other lanes.
+     * @return A list containing the conflicting lanes.
      */
     private static List<Lane> findConflictLeftLane(Lane importantLane, List<Lane> otherLanes) {
         // List for conflict lanes

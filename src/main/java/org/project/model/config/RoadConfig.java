@@ -6,10 +6,9 @@ import org.project.enums.RoadOrientation;
 import java.util.List;
 
 /**
- * RoadConfig is a record that contains information about road ot junction and lanes in that road
- *
- * @param roadOrientation Road orientation on junction (TOP, RIGHT, BOTTOM, LEFT)
- * @param laneConfigList List with information about lanes in this road
+ * Represents the configuration of a single road at the junction, including its lanes.
+ * @param roadOrientation The orientation of the road at the junction (TOP, RIGHT, BOTTOM, or LEFT).
+ * @param laneConfigList The list of configurations for the lanes on this road.
  */
 public record RoadConfig(
         @JsonProperty("roadOrientation") RoadOrientation roadOrientation,

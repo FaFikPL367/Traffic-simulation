@@ -13,6 +13,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * A factory class that creates a Junction model based on the provided junction configuration.
+ */
 public class JunctionFactory {
 
     public static Junction createJunction(JunctionConfig junctionConfig) {
@@ -34,9 +37,9 @@ public class JunctionFactory {
     }
 
     /**
-     * Method to add all passed road orientation in input file to map
-     * @param roadConfigList Read config of how junction will be created
-     * @param roadWithLanes Map that represents list of lanes for each road orientation
+     * Adds all road orientation from the input configuration to the map.
+     * @param roadConfigList The configuration defining how the junction will be created.
+     * @param roadWithLanes A map storing the list of lanes for each road orientation.
      */
     private static void addRoadOrientation(List<RoadConfig> roadConfigList, Map<RoadOrientation, List<Lane>> roadWithLanes) {
         for (RoadConfig roadConfig : roadConfigList) {
@@ -51,10 +54,10 @@ public class JunctionFactory {
     }
 
     /**
-     * Method to add all lanes to added roads
-     * @param roadConfigList Read config of how junction will be created
-     * @param roadWithLanes Map that represents list of lanes for each road orientation
-     * @param allLanes List with all created lanes
+     * Adds all lanes to their corresponding roads base on the configuration.
+     * @param roadConfigList The configuration defining how the junction will be created.
+     * @param roadWithLanes A map storing the list of lanes for each road orientation.
+     * @param allLanes A list that will store all created lanes.
      */
     private static void addLanesToRoads(List<RoadConfig> roadConfigList,
                                         Map<RoadOrientation, List<Lane>> roadWithLanes,
@@ -72,9 +75,9 @@ public class JunctionFactory {
     }
 
     /**
-     * Method to validate created lanes base on input file
-     * @param roadWithLanes Map that represents list of lanes for each road orientation
-     * @param allLanes List with all created lanes
+     * Validates the created lanes based on the input configuration to ensure logical correctness.
+     * @param roadWithLanes A map storing the list of lanes for each road orientation.
+     * @param allLanes A list containing all created lanes.
      */
     private static void validateCreatedLanes(Map<RoadOrientation, List<Lane>> roadWithLanes, List<Lane> allLanes) {
         for (Lane lane : allLanes) {

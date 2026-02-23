@@ -6,7 +6,7 @@ import org.mockito.Mock;
 import org.mockito.MockedStatic;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.project.Simulation;
-import org.project.TrafficController;
+import org.project.util.TrafficController;
 import org.project.enums.LaneDirection;
 import org.project.enums.RoadOrientation;
 import org.project.model.Junction;

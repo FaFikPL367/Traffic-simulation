@@ -110,11 +110,11 @@ public class AutoSimulationTest {
     }
 
     /**
-     * Method to check if all generated command ranges are between min and max value
-     * @param commandList List of generated commands
-     * @param addVehicleMax Max value of generated vehicle
-     * @param stepMax Max value if generated step commands
-     * @return Return true if ranges are good and false otherwise
+     * Checks if the sequences of generated commands are within the specified maximum limits.
+     * @param commandList The list of generated commands to check.
+     * @param addVehicleMax The maximum allowed number of generated vehicles in a sequence.
+     * @param stepMax The maximum allowed number of generated step commands in a sequence.
+     * @return TRUE if the ranges are valid, and FALSE otherwise.
      */
     private boolean checkIfRangesAreCorrect(List<CommandType> commandList, int addVehicleMax, int stepMax) {
         // Variable to count how many command in a row
@@ -144,9 +144,9 @@ public class AutoSimulationTest {
     }
 
     /**
-     * Method to count total step commands
-     * @param commandList Generated command list
-     * @return Return number of generated step commands
+     * Counts all Step command in the command list.
+     * @param commandList The list containing all generated commands.
+     * @return The number of Step commands.
      */
     private long countAllStepCommand(List<CommandType> commandList) {
         return commandList.stream().filter(command -> command.getClass() == Step.class)

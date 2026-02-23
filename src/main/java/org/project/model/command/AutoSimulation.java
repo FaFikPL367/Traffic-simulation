@@ -10,12 +10,12 @@ import java.util.List;
 import java.util.Random;
 
 /**
- * AutoSimulation is a command to generate random simulation based on passed parameters
- * @param numberOfSimulationSteps Number of total simulation steps in random simulation
- * @param minNumberOfVehicleToGenerate Lower range number of vehicle that can be generated in single step
- * @param maxNumberOfVehicleToGenerate Higher range number of vehicle that can be generated in single step
- * @param minSimulationStepInRow Lower range number of steps that can be in a row
- * @param maxSimulationStepInRow Higher range number of steps that can be in a row
+ * A command that generate a random simulation sequence based on the provided parameters.
+ * @param numberOfSimulationSteps The total number of simulation steps in the generated sequence.
+ * @param minNumberOfVehicleToGenerate The minimum number of vehicles that can be generated in a single batch.
+ * @param maxNumberOfVehicleToGenerate The maximum number of vehicles that can be generated in a single batch.
+ * @param minSimulationStepInRow The minimum number of consecutive simulation steps.
+ * @param maxSimulationStepInRow The maximum number of consecutive simulation steps.
  */
 public record AutoSimulation(
         Integer numberOfSimulationSteps,
@@ -54,8 +54,8 @@ public record AutoSimulation(
     }
 
     /**
-     * Method to execute command
-     * @param simulation Main simulation object
+     * Executes the command by generating a random sequence of vehicles and steps.
+     * @param simulation The main simulation object.
      */
     @Override
     public void execute(Simulation simulation) {
@@ -119,17 +119,18 @@ public record AutoSimulation(
     }
 
     /**
-     * Method to generate random INTEGER number in passed range
-     * @return Generated INTEGER number
+     * Generates a random integer within the specified range (inclusive).
+     * @return The generated integer number.
      */
     private int generateRandomNumberInRange(int min, int max) {
         return RANDOM.nextInt(max + 1 - min) + min;
     }
 
     /**
-     * Method to generate addVehicle command and add it to command lst
-     * @param commandList List of all commands
-     * @param generatedNumberOfVehicle Number of addVehicle command that we need to generate
+     * Generates AddVehicle commands and adds them to the command list.
+     * @param commandList The list containing all generated commands.
+     * @param generatedNumberOfVehicle The number of AddVehicle commands to generate.
+     * @param simulation The main simulation object.
      */
     private void generateAddVehicleCommands(List<CommandType> commandList, int generatedNumberOfVehicle, Simulation simulation) {
         // Get copy of list with lanes but without BACKWARD lanes
@@ -157,9 +158,9 @@ public record AutoSimulation(
     }
 
     /**
-     * Method to generate step command and add it to command list
-     * @param commandList List of all commands
-     * @param generatedNumberOfSteps Number of step command that we need to generate
+     * Generates Step commands and adds them to the command list.
+     * @param commandList The list containing all generated commands.
+     * @param generatedNumberOfSteps The number of Step commands to generate.
      */
     private void generateStepCommands(List<CommandType> commandList, int generatedNumberOfSteps) {
         while (generatedNumberOfSteps != 0) {

@@ -10,10 +10,10 @@ import org.project.model.Vehicle;
 import java.util.concurrent.atomic.AtomicInteger;
 
 /**
- * AddVehicle is a command to add vehicle to simulation
- * @param id ID for added vehicle
- * @param startRoadOrientation Where vehicle is staying on junction (which road)
- * @param endRoadOrientation Where vehicle want to go (which road)
+ * A command that adds a new vehicle to the simulation.
+ * @param id The unique ID of added vehicle.
+ * @param startRoadOrientation The road from which the vehicle enters the junction.
+ * @param endRoadOrientation The destination road where the vehicle wants to go.
  */
 public record AddVehicle(
         int id,
@@ -44,7 +44,8 @@ public record AddVehicle(
     }
 
     /**
-     * Method to add vehicle to junction
+     * Executes the command by creating a vehicle and adding it to the appropriate lane in the junction.
+     * @param simulation The current simulation instance.
      */
     @Override
     public void execute(Simulation simulation) {

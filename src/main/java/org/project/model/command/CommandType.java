@@ -1,11 +1,13 @@
 package org.project.model.command;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import org.project.Simulation;
 
 
+/**
+ * A common interface for all executable simulation commands.
+ */
 @JsonTypeInfo(
         use = JsonTypeInfo.Id.NAME,
         include = JsonTypeInfo.As.PROPERTY,
@@ -19,7 +21,8 @@ import org.project.Simulation;
 
 public interface CommandType {
     /**
-     * Method that execute read command
+     * Executes the specific command logic on the provided simulation instance.
+     * @param simulation The current simulation instance.
      */
     void execute(Simulation simulation);
 }

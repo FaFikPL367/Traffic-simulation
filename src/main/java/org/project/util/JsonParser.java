@@ -11,7 +11,7 @@ import java.io.FileNotFoundException;
 import java.util.List;
 
 /**
- * Class for methods used for parsing JSON files
+ * A utility class responsible for parsing and generating JSON files for the simulation.
  */
 public class JsonParser {
 
@@ -19,7 +19,10 @@ public class JsonParser {
     private final ObjectMapper mapper = new ObjectMapper();
 
     /**
-     * Method to read JSON input file
+     * Reads the input JSON file and parses it into a SimulationConfig object.
+     * @param inputFileName The path to the input JSON file.
+     * @return The parsed simulation configuration.
+     * @throws FileNotFoundException If the file is not found or cannot be parsed.
      */
     public SimulationConfig readInput(String inputFileName) throws FileNotFoundException {
         // Create object for file
@@ -39,7 +42,9 @@ public class JsonParser {
     }
 
     /**
-     * Method to write JSON output file
+     * Writes the simulation results to an output JSON file.
+     * @param outputFileName The path where the output JSON file will be saved.
+     * @param passedVehicle A list containing the statuses of vehicles in each step.
      */
     public void writeOutput(String outputFileName, List<StepStatusDto> passedVehicle) {
         try {
@@ -51,6 +56,5 @@ public class JsonParser {
         } catch (Exception e) {
             e.printStackTrace();
         }
-
     }
 }

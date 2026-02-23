@@ -5,7 +5,6 @@ import org.project.enums.LaneDirection;
 import org.project.enums.RoadOrientation;
 import org.project.model.Lane;
 
-import java.lang.reflect.Field;
 import java.util.PriorityQueue;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
