@@ -1,10 +1,13 @@
 package org.project;
 
-
 import java.io.FileNotFoundException;
 
 public class Main {
     static void main(String[] args) throws FileNotFoundException {
+        runConsoleMode(args);
+    }
+
+    private static void runConsoleMode(String[] args) throws FileNotFoundException {
         // Check number of arguments
         if (args.length < 2) {
             System.out.println("Number of arguments is wrong. Need to pass input file name and output file name!");

@@ -41,6 +41,7 @@ public class Simulation {
     private List<Lane> lastGreenLanes = new ArrayList<>();
     private List<StepStatusDto> passedVehicle = new ArrayList<>();
 
+    // Constant values
     public static final double WAITING_TIME_WAGE = 0.8;
     public static final double VEHICLE_COUNT_WAGE = 0.2;
     public static final Comparator<Lane> LANE_COMPARATOR = Comparator
