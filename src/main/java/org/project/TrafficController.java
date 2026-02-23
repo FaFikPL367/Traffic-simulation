@@ -12,7 +12,7 @@ import java.util.List;
  */
 public class TrafficController {
 
-    public static void continueVehicleDrive(Simulation simulation) {
+    public static void continueVehicleDrive(Simulation simulation, int stepId) {
         // List for vehicle that left junction on this step
         List<String> passedVehicle = new ArrayList<>();
 
@@ -27,7 +27,14 @@ public class TrafficController {
         incrementVehicleWaitingTime(simulation);
 
         // Add all passed vehicle to simulation result
-        simulation.getPassedVehicle().add(new StepStatusDto(passedVehicle));
+        simulation.getPassedVehicle().add(new StepStatusDto(
+                passedVehicle,
+                stepId,
+                simulation.getJunction().allLanes().stream()
+                        .mapToInt(Lane::getVehicleCount)
+                        .sum()
+                )
+        );
 
         // Decrement max passed vehicle on this cycle
         simulation.decrementMaxPassedVehicle();

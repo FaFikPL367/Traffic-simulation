@@ -9,7 +9,8 @@ import java.util.List;
  * @param leftVehicles List with IDs of vehicle that left junction on particular step
  */
 public record StepStatusDto(
-        @JsonProperty("leftVehicles")
-        List<String> leftVehicles
+        @JsonProperty("leftVehicles")  List<String> leftVehicles,
+        @JsonProperty("stepId") int stepId,
+        @JsonProperty("totalNumberOfVehicleOnJunction") int totalNumberOfVehicleOnJunction
 ) {
 }

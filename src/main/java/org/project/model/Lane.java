@@ -65,13 +65,6 @@ public class Lane {
                 .sum();
     }
 
-    /**
-     * Method to increment waiting time in queue for this lane
-     */
-    public void incrementWaitingTimeInQueue() {
-        this.timeInPriorityQueue++;
-    }
-
     // ToString
     @Override
     public String toString() {

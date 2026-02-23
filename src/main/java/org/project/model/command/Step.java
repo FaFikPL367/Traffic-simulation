@@ -28,7 +28,7 @@ public record Step(
 
     @Override
     public void execute(Simulation simulation) {
-        System.out.println("Do STEP of simulation!");
+        System.out.printf("Do STEP (%d) of simulation!%n", id);
 
         // Check if we need to pick another priority lane or continue with last one
         if (simulation.getMaxPassedVehicleOnMostImportantLane() == 0) {
@@ -41,7 +41,7 @@ public record Step(
             // Get most priority lane
             Lane priorityLane = simulation.getPriorityLanes().poll();
             simulation.getLastGreenLanes().add(priorityLane);
-            System.out.println(priorityLane);
+            priorityLane.setTimeInPriorityQueue(0);
 
             // Count backward lane for each road
             Map<RoadOrientation, Integer> backwardLaneCounter = recalculateBackwardLanes(simulation, priorityLane);
@@ -78,7 +78,7 @@ public record Step(
         }
 
         // We continue with last priority lane
-        TrafficController.continueVehicleDrive(simulation);
+        TrafficController.continueVehicleDrive(simulation, id);
     }
 
     /**

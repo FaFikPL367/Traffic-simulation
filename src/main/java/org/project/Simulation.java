@@ -73,8 +73,11 @@ public class Simulation {
      * Method to run simulation
      */
     public void runSimulation() {
+        // Copy list of commands
+        List<CommandType> copyCommandList = new ArrayList<>(simulationConfig.commandConfig().commandList());
+
         // Read simulation command
-        for (CommandType command : simulationConfig.commandConfig().commandList()) {
+        for (CommandType command : copyCommandList) {
             // Execute command
             command.execute(this);
         }
