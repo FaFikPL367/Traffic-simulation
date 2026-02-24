@@ -19,10 +19,16 @@ public class Main {
         String outputFileName = args[1];
 
         // Start simulation
-        Simulation simulation = new Simulation(
-                inputFileName,
-                outputFileName
-        );
+        Simulation simulation = null;
+        try {
+            simulation = new Simulation(
+                    inputFileName,
+                    outputFileName
+            );
+        } catch (FileNotFoundException | IllegalArgumentException e) {
+            System.out.println("Error - " + e.getMessage());
+            return;
+        }
 
         // Run simulation
         simulation.runSimulation();

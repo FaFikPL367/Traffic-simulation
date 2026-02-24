@@ -45,7 +45,7 @@ public class Lane {
      * The weight is based on the total waiting time and the current number of vehicles.
      */
     public void countNewWage() {
-        this.laneWage = (Simulation.WAITING_TIME_WAGE * countVehicleWaitingTime()) + (Simulation.VEHICLE_COUNT_WAGE * getVehicleCount());
+        this.laneWage = (Simulation.waitingTimeWage * countVehicleWaitingTime()) + (Simulation.vehicleCountWage * getVehicleCount());
     }
 
     /**

@@ -50,31 +50,39 @@ public class JsonParserTest {
         // Write some correct JSON to file
         String jsonContent = """
                 {
-                    "roads": [
-                        {
-                            "roadOrientation": "BOTTOM",
-                            "lanes": [
-                                {
-                                    "laneDirection": "STRAIGHT",
-                                    "hasPriority": 0
-                                }
-                            ]
-                        },
-                        {
-                            "roadOrientation": "TOP",
-                            "lanes": [
-                                {
-                                    "laneDirection": "BACKWARD",
-                                    "hasPriority": 0
-                                }
-                            ]
-                        }
-                    ],
-                    "commands": [
-                        {
-                            "type": "step"
-                        }
-                    ]
+                    "junction": {
+                        "roads": [
+                            {
+                                "roadOrientation": "BOTTOM",
+                                "lanes": [
+                                    {
+                                        "laneDirection": "STRAIGHT",
+                                        "hasPriority": 0
+                                    }
+                                ]
+                            },
+                            {
+                                "roadOrientation": "TOP",
+                                "lanes": [
+                                    {
+                                        "laneDirection": "BACKWARD",
+                                        "hasPriority": 0
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    "wages": {
+                        "waitingTimeWage": 0.5,
+                        "vehicleCountWage": 0.5
+                    },
+                    "command": {
+                        "commandList": [
+                            {
+                                "type": "step"
+                            }
+                        ]
+                    }
                 }
                 """;
         Files.writeString(existingFile, jsonContent);
@@ -86,6 +94,7 @@ public class JsonParserTest {
         assertNotNull(simulationConfig);
         assertNotNull(simulationConfig.commandConfig());
         assertNotNull(simulationConfig.junctionConfig());
+        assertNotNull(simulationConfig.wagesConfig());
     }
 
     @Test
@@ -105,5 +114,23 @@ public class JsonParserTest {
         String outputResult = Files.readString(outputFile);
         assertTrue(outputResult.contains("car1"));
         assertTrue(outputResult.contains("car2"));
+    }
+
+    @Test
+    void giveEmptyInputFile_whenReadInput_thenThrowException() throws IOException {
+        // Given
+        Path existingFile = tempDir.resolve("input.json");
+
+        String fileContent = "";
+        Files.writeString(existingFile, fileContent);
+
+        // When & Then
+        IllegalArgumentException exception = assertThrows(
+                IllegalArgumentException.class,
+                () -> jsonParser.readInput(existingFile.toString())
+        );
+
+        // Check exception message
+        assertEquals("The structure of the input file is wrong - No content to map due to end-of-input", exception.getMessage());
     }
 }

@@ -44,9 +44,9 @@ public class Simulation {
     private List<Lane> lastGreenLanes = new ArrayList<>();
     private List<StepStatusDto> passedVehicle = new ArrayList<>();
 
-    // Simulation constants
-    public static final double WAITING_TIME_WAGE = 0.8;
-    public static final double VEHICLE_COUNT_WAGE = 0.2;
+    // Simulation wages
+    public static double waitingTimeWage;
+    public static double vehicleCountWage;
 
     /**
      * Comparator for ordering lanes in the priority queue.
@@ -62,12 +62,16 @@ public class Simulation {
             .reversed();
 
     // Constructor
-    public Simulation(String inputFileName, String outputFileName) throws FileNotFoundException {
+    public Simulation(String inputFileName, String outputFileName) throws FileNotFoundException, IllegalArgumentException {
         this.inputFileName = inputFileName;
         this.outputFileName = outputFileName;
 
         // Read input file
         this.simulationConfig = jsonParser.readInput(inputFileName);
+
+        // Set simulation wages
+        waitingTimeWage = simulationConfig.wagesConfig().waitingTimeWage();
+        vehicleCountWage = simulationConfig.wagesConfig().vehicleCountWage();
 
         // Create model of junction
         junction = JunctionFactory.createJunction(simulationConfig.junctionConfig());

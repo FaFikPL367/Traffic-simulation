@@ -10,7 +10,7 @@ import java.util.List;
  * @param commandList A list of commands for the simulation.
  */
 public record CommandConfig(
-        @JsonProperty("commands") List<CommandType> commandList
+        @JsonProperty("commandList") List<CommandType> commandList
 ) {
 
     // Constructor for validating read values
