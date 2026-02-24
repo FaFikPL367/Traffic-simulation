@@ -9,7 +9,7 @@ import java.util.List;
  * @param vehiclesLeft A list containing the status and results of each simulation step.
  */
 public record SimulationResultDto(
-        @JsonProperty("stepStatutes")
+        @JsonProperty("stepStatuses")
         List<StepStatusDto> vehiclesLeft
 ) {
 }

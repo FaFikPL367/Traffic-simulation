@@ -4,11 +4,13 @@ analizowania natężenia ruchu na poszczególnych pasach skrzyżowania. Na podst
 optymalne oraz dynamiczne zmienianie cykli świateł drogowych.
 
 ## Kluczowe funkcjonalności
-1. Tworzenie własnych skrzyżowań z różnymi liczbami pasów, priorytetami pasó∑ itp.
+1. Tworzenie własnych skrzyżowań z różnymi liczbami pasów, priorytetami pasów itp.
 2. Dynamiczne wyznaczanie optymalnego cyklu światła na skrzyżowaniu 
-3. Możliwość włączenia **auto symulacji** gdzie kolejnej jej kroki są losowane
+3. Możliwość włączenia **auto symulacji** gdzie kolejne jej kroki są losowane
 
 ## Struktura projektu
+```text
+AdaptiveTrafficSignalControl
 ```text
 AdaptiveTrafficSignalControl
 |-- src
@@ -16,26 +18,11 @@ AdaptiveTrafficSignalControl
 |   |   |-- java
 |   |   |   `-- org.project
 |   |   |   |   |-- enums
-|   |   |   |   |   |-- LaneDirection.java
-|   |   |   |   |   `-- RoadOrientation.java
 |   |   |   |   |-- factory
-|   |   |   |   |   `-- JunctionFactory.java
 |   |   |   |   |-- model
 |   |   |   |   |   |-- command
-|   |   |   |   |   |   |-- AddVehicle.java
-|   |   |   |   |   |   |-- AutoSimulation.java
-|   |   |   |   |   |   |-- CommandType.java
-|   |   |   |   |   |   `-- Step.java
 |   |   |   |   |   |-- config
-|   |   |   |   |   |   |-- CommandConfig.java
-|   |   |   |   |   |   |-- JunctionConfig.java
-|   |   |   |   |   |   |-- LaneConfig.java
-|   |   |   |   |   |   |-- RoadConfig.java
-|   |   |   |   |   |   |-- SimulationConfig.java
-|   |   |   |   |   |   `-- WagesConfig.java
 |   |   |   |   |   |-- dto
-|   |   |   |   |   |   |-- SimulationResultDto.java
-|   |   |   |   |   |   `-- StepStatusDto.java
 |   |   |   |   |   |-- Junction.java
 |   |   |   |   |   |-- Lane.java
 |   |   |   |   |   `-- Vehicle.java
@@ -46,27 +33,20 @@ AdaptiveTrafficSignalControl
 |   |   |   |   |-- Main.java
 |   |   |   |   `-- Simulation.java
 |   |-- test
-|   |   |-- java
-|   |   |   |-- enums
-|   |   |   |-- factory
-|   |   |   |-- model
-|   |   |   |   |-- command
-|   |   |   |   `-- config
-|   |   |   |-- util
 |-- pom.xml
 |-- README.md
 ```
 
 ## Zasada działania
 Podczas uruchamiania symulacji podajemy plik wejściowy oraz wyjściowy. Plik wejściowy zawiera opis konstrukcji skrzyżowania
-oraz listę komend symulacji do wykonania. W pliku wyjściowym znajdują wyniki symulacji po wykonaniu każdego jej kroku.
+oraz listę komend symulacji do wykonania. W pliku wyjściowym znajdują się wyniki symulacji po wykonaniu każdego jej kroku.
 
-Algorytm decydujący o zmianie haseł opiera się na kilku rzeczach:
-1. Dla każdego pasa (droga może mieć wiele pasów) wyliczamy jej **koszt**. Wzór na koszt to: (S * SW) + (V * VW).
-   2. **S** - to suma czasów oczekiwania wszystkich samochodów na danym pasie. Od momentu dodania samochodu do pasa wzrasta jego czas oczekiwania na opuszczenie skrzyżowania aż go nie opuści
-   3. **SW** - to **waga** dla wartości **S**. Wartość z przedziału (0.0, 1.0).
-   4. **V** - to liczba samochodów na danym pasie
-   5. **VW** - to **waga** dla wartości **V**. Wartość z przedziału (0.0, 1.0).
+Algorytm decydujący o zmianie cykli świateł opiera się na kilku rzeczach:
+1. Dla każdego pasa (droga może mieć wiele pasów) wyliczamy jego **koszt**. Wzór na koszt to: $(S * SW) + (V * VW)$.
+    * **S** - to suma czasów oczekiwania wszystkich samochodów na danym pasie. Od momentu dodania samochodu do pasa wzrasta jego czas oczekiwania na opuszczenie skrzyżowania aż do momentu jego opuszczenia.
+    * **SW** - to **waga** dla wartości **S**. Wartość z przedziału (0.0, 1.0).
+    * **V** - to liczba samochodów na danym pasie.
+    * **VW** - to **waga** dla wartości **V**. Wartość z przedziału (0.0, 1.0).
 2. Każdy pas posiada również informacje czy ma on **priorytet**. W konfiguracji skrzyżowania określamy dla każdego pasa czy ma priorytet czy nie.
 
 Algorytm opiera się na działaniu **kolejki priorytetowej** skonfigurowanej w taki sposób, aby brała ona pod uwagę parametry danego pasa w odpowiedni sposób.
@@ -135,25 +115,25 @@ Poniżej znajduje się przykład jak taki plik powinien wyglądać:
 1. **Junction** - to część pliku gdzie podajemy jak dane skrzyżowanie ma wyglądać (dokładnie ile ma mieć dróg oraz jakie to drogi
 oraz pasy dla każdej podanej drogi). Jesteśmy wstanie stworzyć różne konfiguracje gdzie np. odnoga skrzyżowania to droga jednokierunkowa,
 mamy wiele pasów do jazdy w tym samym kierunku, różne kształty itp.
-   2. **roadOrientation** - to parametr mówiący nam o tym jaki będzie kształt skrzyżowania. Te pole może mieć 4 wartości:
+   * **roadOrientation** - to parametr mówiący nam o tym jaki będzie kształt skrzyżowania. To pole może mieć 4 wartości:
    BOTTOM, RIGHT, TOP, LEFT - gdzie każda reprezentuje inną odnogę skrzyżownia.
-   3. **lanes** - to lista pasów dla każdej odnogi skrzyżowania. Kierunek pas to 4 możliwe wartości: STRAIGHT.
+   * **lanes** - to lista pasów dla każdej odnogi skrzyżowania. Kierunek pas to 4 możliwe wartości: STRAIGHT.
    RIGHT, LEFT, BACKWARD - oraz musimy określić dla każdego pasa czy ma on priorytet (0 lub 1).
 2. **Wages** - tutaj podajemy wartości dwóch wag z przedziału od 0.0 do 1.0 (bez wartości granicznych). Ważne jest to, że muszą się sumować do 1.0.
 3. **Command** - tutaj podajemy **commandList**, która zawiera listę komend do wykonania. Komende rozpoznajemy po polu **type**:
-   4. **addVehicle** - dodajemy pojazd do skrzyżowania oraz podajemy z jakiej drogi i na którą chce on wjechać.
-   5. **step** - to wykonanie kroku symulacji i po każdym takim korku zapisujemy jakie pojazdy opuściły skrzyżowanie podczas tego kroku.
-   6. **autoSimulation** - pozwala nam na wygenerowanie listy komend na podstawie podanych parametrów:
-      7. **numberOfSimulationSteps** - ile komend **step** ma się wykonać (dokładnie tyle się wykona).
-      8. **minNumberOfVehicleToGenerate** i **maxNumberOfVehicleToGenerate** - określają one przedział, z którego będzie losowana liczba
+   * **addVehicle** - dodajemy pojazd do skrzyżowania oraz podajemy z jakiej drogi i na którą chce on wjechać.
+   * **step** - to wykonanie kroku symulacji i po każdym takim korku zapisujemy jakie pojazdy opuściły skrzyżowanie podczas tego kroku.
+   * **autoSimulation** - pozwala nam na wygenerowanie listy komend na podstawie podanych parametrów:
+     * **numberOfSimulationSteps** - ile komend **step** ma się wykonać (dokładnie tyle się wykona).
+     * **minNumberOfVehicleToGenerate** i **maxNumberOfVehicleToGenerate** - określają one przedział, z którego będzie losowana liczba
       oznaczające ile samochodów z rzędu mamy dodać do skrzyżowania.
-      9. **minSimulationStepInRow** i **maxSimulationStepInRow** - określają one przedział, z którego będzie losowana liczba
+     * **minSimulationStepInRow** i **maxSimulationStepInRow** - określają one przedział, z którego będzie losowana liczba
          oznaczające ile komend **step** z rzędu mamy dodać do list komend do wykonania.
 
 ## Opis pliku wyjściowego (JSON)
 ```json
 {
-  "stepStatutes" : [ {
+  "stepStatuses" : [ {
     "leftVehicles" : [ "1", "2", "13", "4" ],
     "stepId" : 1,
     "totalNumberOfVehicleOnJunction" : 10
@@ -166,15 +146,16 @@ mamy wiele pasów do jazdy w tym samym kierunku, różne kształty itp.
     "stepId" : 3,
     "totalNumberOfVehicleOnJunction" : 5
   }
+  ]
 }
 ```
-1. **leftVehicles** - to lista ID pojazdów, które opuściły skrzyżowanie w danym korku symulacji.
+1. **leftVehicles** - to lista ID pojazdów, które opuściły skrzyżowanie w danym kroku symulacji.
 2. **stepId** - to unikatowy ID kroku symulacji.
 3. **totalNumberOfVehicleOnJunction** - to liczba pojazdów, które jeszcze zostały na skrzyżowaniu po wykonaniu kroku symulacji.
 
 ## Technologie i narzędzia
 Symulacja została napisana w **Java 25**, narzędziem wykorzystanym do budowania projektu i zarządzania zależnościami jest **Maven**.
-Narzędziem do mapowania i walidacji plików JSON jest **Jackson**. Do testów został wykorzystany **Junit 6**. Dodatkowym narzędziem
+Narzędziem do mapowania i walidacji plików JSON jest **Jackson**. Do testów został wykorzystany **Junit 5**. Dodatkowym narzędziem
 użytym do usunięcia powtarzającego się kodu jest **Lombok**.
 
 ## Uruchomienie projektu
